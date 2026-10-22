@@ -47,7 +47,9 @@ T = {
 "Continue Reading":"Continuar a ler", "Reading Mode":"Modo de leitura",
 "Left to Right":"Da esquerda para a direita", "Right to Left":"Da direita para a esquerda",
 "Webtoon":"Webtoon", "Previous Chapter":"Capítulo anterior", "Next Chapter":"Próximo capítulo",
-"Chapter":"Capítulo", "Manga":"Mangá", "Failed to load chapter pages":"Não foi possível carregar as páginas do capítulo",
+"Chapter":"Capítulo", "Manga":"Mangá", "Sort By":"Ordenar por", "Alphabetical":"Ordem alfabética",
+"Unknown Title":"Título desconhecido", "Response body is null":"A resposta do servidor está vazia",
+"Failed to load chapter pages":"Não foi possível carregar as páginas do capítulo",
 "Failed to load manga details":"Não foi possível carregar os detalhes do mangá",
 }
 T.update({
@@ -59,6 +61,7 @@ D+"{uiState.readingMode.label} • Page "+D+"{uiState.currentPage + 1} / "+D+"{u
 "Page "+D+"{index + 1}":"Página "+D+"{index + 1}",
 "Page "+D+"{actualIndex + 1}":"Página "+D+"{actualIndex + 1}",
 D+"{entry.chapter.chapterNumber}":"Capítulo "+D+"{entry.chapter.chapterNumber}",
+D+"{index + 1}":"Capítulo "+D+"{index + 1}",
 })
 PREFIX = {
 '"Search manga in ': '"Pesquisar mangás em ',
@@ -66,6 +69,7 @@ PREFIX = {
 '"Artist: ': '"Ilustrador: ', '"Status: ': '"Estado: ',
 '"Source: ': '"Fonte: ', '"Source not found: ': '"Fonte não encontrada: ',
 '"Page ': '"Página ', '"Chapter ': '"Capítulo ',
+'"HTTP error ': '"Erro HTTP ', '"Empty response body from ': '"A resposta do servidor está vazia em ', '"MangaDex API error ': '"Erro da API do MangaDex ', '"Failed to parse MangaDex response from ': '"Não foi possível interpretar a resposta do MangaDex de ', '"Failed to download image: ': '"Não foi possível transferir a imagem: ',
 }
 def translate_kotlin():
     for p in (ROOT / "java/com/mangayomu").rglob("*.kt"):
