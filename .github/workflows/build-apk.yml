@@ -19,7 +19,7 @@ jobs:
       - name: Restore Android project from ZIP
         run: |
           test -f MangaYomu-GitHub-Ready.zip
-          unzip -o MangaYomu-GitHub-Ready.zip -d .
+          unzip -n MangaYomu-GitHub-Ready.zip -d .
           test -f app/build.gradle.kts
       - name: Set up JDK 17
         uses: actions/setup-java@v4
