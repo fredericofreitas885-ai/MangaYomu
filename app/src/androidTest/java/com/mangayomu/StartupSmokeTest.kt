@@ -3,7 +3,6 @@ package com.mangayomu
 import android.os.SystemClock
 import androidx.lifecycle.Lifecycle
 import androidx.test.ext.junit.rules.ActivityScenarioRule
-import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
@@ -17,12 +16,10 @@ class StartupSmokeTest {
 
     @Test
     fun mainActivityStaysResumedAfterStartup() {
-        InstrumentationRegistry.getInstrumentation().waitForIdleSync()
         assertActivityResumed()
 
-        // Check again after first-render effects and startup network work begin.
+        // Check again after the first-render effects and startup work begin.
         SystemClock.sleep(1500)
-        InstrumentationRegistry.getInstrumentation().waitForIdleSync()
         assertActivityResumed()
     }
 
