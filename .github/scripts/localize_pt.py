@@ -55,6 +55,7 @@ T.update({
 "Downloads ("+D+"{downloads.size})":"Transferências ("+D+"{downloads.size})",
 "Chapter "+D+"{chapter.chapterNumber}":"Capítulo "+D+"{chapter.chapterNumber}",
 D+"{uiState.chapters.size} Chapters":D+"{uiState.chapters.size} capítulos",
+D+"{uiState.readingMode.label} • Page "+D+"{uiState.currentPage + 1} / "+D+"{uiState.pages.size}":D+"{uiState.readingMode.label} • Página "+D+"{uiState.currentPage + 1} / "+D+"{uiState.pages.size}",
 "Page "+D+"{index + 1}":"Página "+D+"{index + 1}",
 "Page "+D+"{actualIndex + 1}":"Página "+D+"{actualIndex + 1}",
 })
