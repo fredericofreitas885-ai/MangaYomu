@@ -1,0 +1,16 @@
+COMO GERAR O APK PELO GITHUB
+
+1. Entre em https://github.com e crie um repositório novo chamado MangaYomu.
+2. Extraia este ZIP no computador.
+3. Envie todos os arquivos e pastas extraídos para a raiz do repositório
+   (o arquivo settings.gradle.kts deve ficar na raiz).
+4. Abra a aba Actions do repositório.
+5. Se solicitado, habilite GitHub Actions.
+6. O workflow "Build MangaYomu APK" inicia ao enviar os arquivos. Também pode
+   ser iniciado manualmente em Actions > Build MangaYomu APK > Run workflow.
+7. Quando terminar com sucesso, abra a execução, desça até Artifacts e baixe
+   MangaYomu-Debug-APK. Extraia o ZIP do artifact para obter app-debug.apk.
+
+Nota: este é um APK de depuração (debug), adequado para instalação/teste.
+O build ainda precisa ser executado pelo GitHub Actions; este arquivo ZIP
+contém o projeto preparado e não contém um APK já compilado.
