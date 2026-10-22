@@ -47,7 +47,7 @@ T = {
 "Continue Reading":"Continuar a ler", "Reading Mode":"Modo de leitura",
 "Left to Right":"Da esquerda para a direita", "Right to Left":"Da direita para a esquerda",
 "Webtoon":"Webtoon", "Previous Chapter":"Capítulo anterior", "Next Chapter":"Próximo capítulo",
-"Chapter":"Capítulo", "Failed to load chapter pages":"Não foi possível carregar as páginas do capítulo",
+"Chapter":"Capítulo", "Manga":"Mangá", "Failed to load chapter pages":"Não foi possível carregar as páginas do capítulo",
 "Failed to load manga details":"Não foi possível carregar os detalhes do mangá",
 }
 T.update({
@@ -58,6 +58,7 @@ D+"{uiState.chapters.size} Chapters":D+"{uiState.chapters.size} capítulos",
 D+"{uiState.readingMode.label} • Page "+D+"{uiState.currentPage + 1} / "+D+"{uiState.pages.size}":D+"{uiState.readingMode.label} • Página "+D+"{uiState.currentPage + 1} / "+D+"{uiState.pages.size}",
 "Page "+D+"{index + 1}":"Página "+D+"{index + 1}",
 "Page "+D+"{actualIndex + 1}":"Página "+D+"{actualIndex + 1}",
+D+"{entry.chapter.chapterNumber}":"Capítulo "+D+"{entry.chapter.chapterNumber}",
 })
 PREFIX = {
 '"Search manga in ': '"Pesquisar mangás em ',
