@@ -61,7 +61,7 @@ D+"{uiState.readingMode.label} • Page "+D+"{uiState.currentPage + 1} / "+D+"{u
 "Page "+D+"{index + 1}":"Página "+D+"{index + 1}",
 "Page "+D+"{actualIndex + 1}":"Página "+D+"{actualIndex + 1}",
 D+"{entry.chapter.chapterNumber}":"Capítulo "+D+"{entry.chapter.chapterNumber}",
-D+"{index + 1}":"Capítulo "+D+"{index + 1}",
+"Chapter "+D+"{index + 1}":"Capítulo "+D+"{index + 1}",
 })
 PREFIX = {
 '"Search manga in ': '"Pesquisar mangás em ',
