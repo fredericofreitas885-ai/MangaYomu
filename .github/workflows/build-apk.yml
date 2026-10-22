@@ -46,9 +46,14 @@ jobs:
             adb logcat -c
             gradle installDebug --stacktrace
             adb shell am force-stop com.mangayomu
-            adb shell am start -W -n com.mangayomu/.MainActivity || true
+            adb shell am start -n com.mangayomu/.MainActivity || true
             sleep 8
             adb logcat -d -v threadtime > app/build/outputs/startup-logcat-full.txt
+            if grep -q 'FATAL EXCEPTION' app/build/outputs/startup-logcat-full.txt; then
+              echo "ERROR: Android logged a fatal exception during app startup."
+              grep -n -A45 -B5 -E 'FATAL EXCEPTION|Process: com.mangayomu|AndroidRuntime' app/build/outputs/startup-logcat-full.txt || true
+              exit 1
+            fi
             if ! adb shell pidof com.mangayomu >/dev/null 2>&1; then
               echo "ERROR: com.mangayomu process is not running after launch."
               grep -n -A45 -B5 -E 'FATAL EXCEPTION|Process: com.mangayomu|AndroidRuntime' app/build/outputs/startup-logcat-full.txt || true
