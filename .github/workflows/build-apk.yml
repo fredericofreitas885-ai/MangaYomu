@@ -22,6 +22,8 @@ jobs:
           test -f MangaYomu-GitHub-Ready.zip
           unzip -n MangaYomu-GitHub-Ready.zip -d .
           test -f app/build.gradle.kts
+      - name: Translate app interface to Portuguese
+        run: python .github/scripts/localize_pt.py
       - name: Upload restored Android sources for localization review
         uses: actions/upload-artifact@v4
         with:
