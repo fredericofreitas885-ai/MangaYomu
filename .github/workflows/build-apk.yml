@@ -22,6 +22,20 @@ jobs:
           test -f MangaYomu-GitHub-Ready.zip
           unzip -n MangaYomu-GitHub-Ready.zip -d .
           test -f app/build.gradle.kts
+      - name: Upload restored Android sources for localization review
+        uses: actions/upload-artifact@v4
+        with:
+          name: MangaYomu-Restored-Source
+          path: |
+            app/src/main/**
+            app/src/androidTest/**
+            app/src/test/**
+            app/build.gradle.kts
+            build.gradle.kts
+            settings.gradle.kts
+          if-no-files-found: warn
+          retention-days: 1
+
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
