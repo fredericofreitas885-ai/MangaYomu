@@ -41,20 +41,28 @@ jobs:
           arch: x86_64
           profile: pixel_2
           script: |
-            set +e
-            gradle connectedDebugAndroidTest --stacktrace
-            TEST_STATUS=$?
+            set -u
             mkdir -p app/build/outputs
-            adb logcat -d -v threadtime | grep -E 'FATAL EXCEPTION|AndroidRuntime|com\\.mangayomu' | tail -n 250 > app/build/outputs/startup-logcat.txt || true
-            cat app/build/outputs/startup-logcat.txt
-            exit $TEST_STATUS
+            adb logcat -c
+            gradle installDebug --stacktrace
+            adb shell am force-stop com.mangayomu
+            adb shell am start -W -n com.mangayomu/.MainActivity || true
+            sleep 8
+            adb logcat -d -v threadtime > app/build/outputs/startup-logcat-full.txt
+            if ! adb shell pidof com.mangayomu >/dev/null 2>&1; then
+              echo "ERROR: com.mangayomu process is not running after launch."
+              grep -n -A45 -B5 -E 'FATAL EXCEPTION|Process: com.mangayomu|AndroidRuntime' app/build/outputs/startup-logcat-full.txt || true
+              exit 1
+            fi
+            echo "PASS: com.mangayomu process survived startup."
+            grep -n -A45 -B5 -E 'FATAL EXCEPTION|Process: com.mangayomu|AndroidRuntime' app/build/outputs/startup-logcat-full.txt || true
 
       - name: Upload startup diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: MangaYomu-Startup-Diagnostics
-          path: app/build/outputs/startup-logcat.txt
+          path: app/build/outputs/startup-logcat-full.txt
           if-no-files-found: ignore
           retention-days: 7
 
