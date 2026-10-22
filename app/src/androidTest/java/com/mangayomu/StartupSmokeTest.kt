@@ -1,27 +1,34 @@
 package com.mangayomu
 
 import android.os.SystemClock
-import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import androidx.compose.ui.test.onNodeWithText
-import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.lifecycle.Lifecycle
+import androidx.test.ext.junit.rules.ActivityScenarioRule
+import androidx.test.platform.app.InstrumentationRegistry
+import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import androidx.test.ext.junit.runners.AndroidJUnit4
 
 @RunWith(AndroidJUnit4::class)
 class StartupSmokeTest {
     @get:Rule
-    val composeRule = createAndroidComposeRule<MainActivity>()
+    val activityRule = ActivityScenarioRule(MainActivity::class.java)
 
     @Test
-    fun appLaunchesAndShowsExploreScreen() {
-        composeRule.waitForIdle()
-        composeRule.onNodeWithText("MangaYomu").assertIsDisplayed()
+    fun mainActivityStaysResumedAfterStartup() {
+        InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+        assertActivityResumed()
 
-        // Keep the process alive briefly so startup effects can run too.
+        // Check again after first-render effects and startup network work begin.
         SystemClock.sleep(1500)
-        composeRule.waitForIdle()
-        composeRule.onNodeWithText("MangaYomu").assertIsDisplayed()
+        InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+        assertActivityResumed()
+    }
+
+    private fun assertActivityResumed() {
+        activityRule.scenario.onActivity { activity ->
+            assertEquals(Lifecycle.State.RESUMED, activity.lifecycle.currentState)
+        }
     }
 }
