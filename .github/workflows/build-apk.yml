@@ -49,7 +49,7 @@ jobs:
           arch: x86_64
           profile: pixel_2
           script: |
-            set -u
+            set -e
             mkdir -p app/build/outputs
             adb logcat -c
             gradle installDebug --stacktrace
@@ -57,18 +57,8 @@ jobs:
             adb shell am start -n com.mangayomu/.MainActivity || true
             sleep 8
             adb logcat -d -v threadtime > app/build/outputs/startup-logcat-full.txt
-            if grep -q 'FATAL EXCEPTION' app/build/outputs/startup-logcat-full.txt; then
-              echo "ERROR: Android logged a fatal exception during app startup."
-              grep -n -A45 -B5 -E 'FATAL EXCEPTION|Process: com.mangayomu|AndroidRuntime' app/build/outputs/startup-logcat-full.txt || true
-              exit 1
-            fi
-            if ! adb shell pidof com.mangayomu >/dev/null 2>&1; then
-              echo "ERROR: com.mangayomu process is not running after launch."
-              grep -n -A45 -B5 -E 'FATAL EXCEPTION|Process: com.mangayomu|AndroidRuntime' app/build/outputs/startup-logcat-full.txt || true
-              exit 1
-            fi
-            echo "PASS: com.mangayomu process survived startup."
-            grep -n -A45 -B5 -E 'FATAL EXCEPTION|Process: com.mangayomu|AndroidRuntime' app/build/outputs/startup-logcat-full.txt || true
+            adb shell pidof com.mangayomu
+            ! grep -q 'FATAL EXCEPTION' app/build/outputs/startup-logcat-full.txt
 
       - name: Upload startup diagnostics
         if: always()
